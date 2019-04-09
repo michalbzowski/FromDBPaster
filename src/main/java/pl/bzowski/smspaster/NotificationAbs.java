@@ -1,43 +1,44 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package pl.bzowski.smspaster;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.TrayIcon.MessageType;
-import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 
 /**
- *
  * @author mbzowski
  */
-public class NotificationAbs {
+class NotificationAbs {
 
-    public void notifyAction(String message) {
-        if (SystemTray.isSupported()) {
-            try {
-                displayTray(message);
-            } catch (AWTException ex) {
-                Logger.getLogger(NotificationAbs.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(NotificationAbs.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            System.err.println("System tray not supported!");
-        }
-    }
+	void notifyAction(final String message) {
+		if (SystemTray.isSupported()) {
+			try {
+				displayTray(message);
+			} catch (final AWTException ex) {
+				Logger.getLogger(NotificationAbs.class.getName()).log(Level.SEVERE, null, ex);
+			}
+		} else {
+			System.err.println("System tray not supported!");
+		}
+	}
 
-    public void displayTray(String message) throws AWTException, java.net.MalformedURLException {
-        SystemTray tray = SystemTray.getSystemTray();
-        Image image = new ImageIcon(this.getClass().getResource("/ikona.ico")).getImage();
-        TrayIcon trayIcon = new TrayIcon(image, "Tray Demo");
-        trayIcon.setImageAutoSize(true);
-        TrayIcon[] trayIcons = tray.getTrayIcons();
-        for (TrayIcon tc : trayIcons) {
-            tray.remove(tc);
-        }
-        tray.add(trayIcon);
-        trayIcon.displayMessage("SmsPaster", message, MessageType.INFO);
-    }
+	private void displayTray(final String message) throws AWTException {
+		final SystemTray tray = SystemTray.getSystemTray();
+		final Image image = new ImageIcon(this.getClass().getResource("/ikona.ico")).getImage();
+		final TrayIcon trayIcon = new TrayIcon(image, "Tray Demo");
+		trayIcon.setImageAutoSize(true);
+		final TrayIcon[] trayIcons = tray.getTrayIcons();
+		for (final TrayIcon tc : trayIcons) {
+			tray.remove(tc);
+		}
+		tray.add(trayIcon);
+		trayIcon.displayMessage("SmsPaster", message, MessageType.INFO);
+	}
 
 }

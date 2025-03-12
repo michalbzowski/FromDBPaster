@@ -1,5 +1,4 @@
-# FromDBPaster
-This little program can connect to oracle db, execute simple select and paste result to textfield, where text cursor is active. 
+Byłem tutaj :)
 Simple usecase
 You are web developer and in local enviroment you run web app. 
 When you want to sign in to Your app you need sms code from database
